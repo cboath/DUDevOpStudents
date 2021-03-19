@@ -6,8 +6,7 @@ Parameters:
     Default: DuClassUsers
   apiRelease:
     Type: String
-  deploybucket:
-    Type: String
+  # Bucket placeholder
 
 Resources: 
   # Create a role
@@ -34,7 +33,7 @@ Resources:
   DuDevOpsApiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: DuDevOpsApiGateway
+      Name: DuDevOpsApiGateway #? Convention?
       Parameters:
         endpointConfigurationTypes: EDGE
 
@@ -113,7 +112,6 @@ Resources:
       RestApiId: !Ref DuDevOpsApiGateway
       DeploymentId: !Ref DUDOCApiDeployment
 
-
   # Create Database table
   DUClassTable:
     Type: AWS::DynamoDB::Table
@@ -138,13 +136,12 @@ Resources:
       Handler: index.lambdaHandler
       Runtime: nodejs10.x
       Code:
-        S3Bucket: !Ref deploybucket
+        S3Bucket: # TODO Update with Parameter added
         S3Key: !Sub "${apiRelease}/lambda-src/DuGetLambda.zip"
       Environment:
         Variables:
           DB_HOST: !Ref "mappingDbHost"
       Timeout: 60
-
 
 # Lambda Permission For API GateWay
   lambdaApiGatewayInvokeGetStudents:

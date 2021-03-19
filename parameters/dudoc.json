@@ -4,7 +4,7 @@
         "ParameterValue": "1.0.2"
     },
     {
-        "ParameterKey": "deploybucket",
-        "ParameterValue": "dudevopsclassbucket"
+        "ParameterKey": "<BUCKET PARAMETER>",
+        "ParameterValue": "<YOURBUCKETNAME>"
     }
 ]
