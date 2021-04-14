@@ -30,10 +30,10 @@ Resources:
       RoleName: "DUClassLambdaRole"  
 
   # Create API gateway
-  DuDevOpsApiGateway:
+  #Give it a name:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: DuDevOpsApiGateway #? Convention?
+      Name: #Match the name - or not
       Parameters:
         endpointConfigurationTypes: EDGE
 
@@ -42,7 +42,7 @@ Resources:
     Type: 'AWS::ApiGateway::Resource'
     DependsOn: DuDevOpsApiGateway
     Properties:
-      RestApiId: !Ref "DuDevOpsApiGateway"
+      RestApiId: !Ref #! API gateway
       ParentId: !GetAtt
         - DuDevOpsApiGateway
         - RootResourceId
@@ -125,7 +125,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 10
         WriteCapacityUnits: 10
-      TableName: DuClassUsers
+      TableName: !Ref "mappingDbHost"
 
 # Create lambda 
   DuGetLambda:
