@@ -6,7 +6,8 @@ Parameters:
     Default: DuClassUsers
   apiRelease:
     Type: String
-  # Bucket placeholder
+  deploybucket:
+    Type: String
 
 Resources: 
   # Create a role
@@ -25,15 +26,15 @@ Resources:
       Path: /
       Description: "Role for performing functions in the class"
       ManagedPolicyArns:
-        - "arn:aws:iam::aws:policy/AWSLambdaFullAccess"
+        - "arn:aws:iam::aws:policy/AWSLambda_FullAccess"
         - "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
       RoleName: "DUClassLambdaRole"  
 
   # Create API gateway
-  #Give it a name:
+  DuDevOpsApiGateway:
     Type: AWS::ApiGateway::RestApi
     Properties:
-      Name: #Match the name - or not
+      Name: DuDevOpsApiGateway
       Parameters:
         endpointConfigurationTypes: EDGE
 
@@ -42,7 +43,7 @@ Resources:
     Type: 'AWS::ApiGateway::Resource'
     DependsOn: DuDevOpsApiGateway
     Properties:
-      RestApiId: !Ref #! API gateway
+      RestApiId: !Ref DuDevOpsApiGateway
       ParentId: !GetAtt
         - DuDevOpsApiGateway
         - RootResourceId
@@ -136,7 +137,7 @@ Resources:
       Handler: index.lambdaHandler
       Runtime: nodejs10.x
       Code:
-        S3Bucket: # TODO Update with Parameter added
+        S3Bucket: deploybucket
         S3Key: !Sub "${apiRelease}/lambda-src/DuGetLambda.zip"
       Environment:
         Variables:

@@ -4,7 +4,7 @@
         "ParameterValue": "1.0.2"
     },
     {
-        "ParameterKey": "<BUCKET PARAMETER>",
+        "ParameterKey": "deploybucket",
         "ParameterValue": "<YOURBUCKETNAME>"
     }
 ]
