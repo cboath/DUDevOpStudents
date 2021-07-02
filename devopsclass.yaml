@@ -137,7 +137,7 @@ Resources:
       Handler: index.lambdaHandler
       Runtime: nodejs10.x
       Code:
-        S3Bucket: deploybucket
+        S3Bucket: !Ref deploybucket
         S3Key: !Sub "${apiRelease}/lambda-src/DuGetLambda.zip"
       Environment:
         Variables:
