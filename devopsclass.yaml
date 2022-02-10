@@ -135,7 +135,7 @@ Resources:
       FunctionName: DuGetLambda
       Role: !GetAtt DUClassLambdaRole.Arn
       Handler: index.lambdaHandler
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       Code:
         S3Bucket: !Ref deploybucket
         S3Key: !Sub "${apiRelease}/lambda-src/DuGetLambda.zip"
